@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: #faf8f3;
+    --color-bg-elevated: #fdfcf9;
+    --color-surface: #f5f1e8;
+    --color-border: #e4dcc8;
+    --color-border-strong: #d6ccb4;
+    --color-text: #1c1b1a;
+    --color-text-muted: #52514d;
+    --color-text-subtle: #7a7872;
+    --color-accent: #a8d61f;
+    --color-accent-hover: #86b312;
+    --color-accent-soft: #eefbc6;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', ui-serif, Georgia, serif;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  /* Visible keyboard focus everywhere */
+  :focus-visible {
+    outline: 2px solid var(--color-accent-hover);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Remove focus ring for mouse users */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-soft);
+    color: var(--color-text);
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-6 md:px-8 lg:px-10;
+  }
+
+  .container-wide {
+    @apply mx-auto w-full max-w-7xl px-6 md:px-8 lg:px-10;
+  }
+
+  .card-surface {
+    @apply bg-ivory-50 border border-ink-200/60 rounded-lg;
+  }
+
+  .hairline {
+    @apply border-t border-ink-200/50;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print styles for public proposal */
+@media print {
+  .print\:hidden {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+  }
+
+  .shadow-sm, .shadow-lg {
+    box-shadow: none !important;
+  }
+
+  article {
+    max-width: 100% !important;
+  }
+
+  .break-inside-avoid {
+    break-inside: avoid;
+  }
+}
