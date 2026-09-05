@@ -17,6 +17,7 @@ export function SignupPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [needsConfirmation, setNeedsConfirmation] = useState(false);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -27,8 +28,8 @@ export function SignupPage() {
       return;
     }
 
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters long.');
+    if (password.length < 10) {
+      setError('Password must be at least 10 characters long.');
       return;
     }
 
@@ -38,16 +39,16 @@ export function SignupPage() {
     }
 
     setLoading(true);
-    const { error: signUpError } = await supabase.auth.signUp({ email, password });
-    setLoading(false);
-
-    if (signUpError) {
-      setError(getSignupError());
-      return;
-    }
-
-    navigate('/dashboard');
+    try {
+      const { data, error: signUpError } = await supabase.auth.signUp({ email, password });
+      if (signUpError) { setError(getSignupError()); return; }
+      if (!data.session) { setPassword(''); setConfirmPassword(''); setNeedsConfirmation(true); return; }
+      navigate('/dashboard');
+    } catch { setError('Connection failed. Please try again.'); }
+    finally { setLoading(false); }
   }
+
+  if (needsConfirmation) return <AuthLayout><h1 className="text-center font-serif text-2xl">Check your email</h1><p className="mt-5 text-center text-sm">If this address can be registered, you will receive a confirmation link. Open it to finish creating your account.</p><Link className="mt-5 block text-center underline" to="/login">Back to sign in</Link></AuthLayout>;
 
   return (
     <AuthLayout>
@@ -74,8 +75,8 @@ export function SignupPage() {
           autoComplete="new-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="At least 6 characters"
-          hint="Use at least 6 characters"
+          placeholder="At least 10 characters"
+          hint="Use at least 10 characters"
           required
         />
         <Input

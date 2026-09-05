@@ -22,11 +22,14 @@ export function ForgotPasswordPage() {
     }
 
     setLoading(true);
-    await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/login`,
-    });
-    setLoading(false);
-    setSent(true);
+    try {
+      const { error: requestError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      if (requestError) { setError('The reset request could not be completed. Please wait a moment and try again.'); return; }
+      setSent(true);
+    } catch { setError('Connection failed. Please try again.'); }
+    finally { setLoading(false); }
   }
 
   if (sent) {

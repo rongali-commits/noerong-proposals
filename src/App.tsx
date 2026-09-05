@@ -10,6 +10,7 @@ import { HomePage } from '@/pages/HomePage';
 import { LoginPage } from '@/pages/LoginPage';
 import { SignupPage } from '@/pages/SignupPage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
+import { ResetPasswordPage } from '@/pages/ResetPasswordPage';
 import { SampleProposalPage } from '@/pages/SampleProposalPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 
@@ -103,6 +104,7 @@ function AppRoutes() {
           </RedirectIfAuthed>
         }
       />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/sample-proposal" element={<SampleProposalPage />} />
       <Route path="/p/:token" element={<LazyRoute><PublicProposalPage /></LazyRoute>} />
       <Route
