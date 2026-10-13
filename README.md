@@ -4,7 +4,7 @@
 
 **Scope, pricing and the client decision in one clear place.**
 
-[Live product](https://noerong-proposals-sa-ta7h.bolt.host) Â· [Public sample](https://noerong-proposals-sa-ta7h.bolt.host/sample-proposal) Â· [Case study](https://noerong.com/projects/noerong-proposals)
+[Live product](https://noerong-proposals-sa-ta7h.bolt.host) · [Public sample](https://noerong-proposals-sa-ta7h.bolt.host/sample-proposal) · [Case study](https://noerong.com/projects/noerong-proposals)
 
 ![Client proposal sample using fictional business records](docs/screenshot.png)
 
